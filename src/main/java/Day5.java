@@ -21,14 +21,14 @@ public class Day5 {
 
     public static void main(String[] args) throws IOException {
         final List<String> lines = Files.lines(Path.of("C:\\inputDay5.txt")).collect(Collectors.toUnmodifiableList());
-        long result1 = partOne(lines);
+        int result1 = partOne(lines);
         System.out.println(" Part One  := " + result1);
-        long result2 = partTwo(lines);
+        int result2 = partTwo(lines);
         System.out.println(" Part Two := " + result2);
 
     }
 
-    static long partOne(List<String> codes) {
+    static int partOne(List<String> codes) {
         return getHighestSeatID(codes.stream().map(Day5::computeSeatNumber).collect(Collectors.toUnmodifiableSet()));
     }
 
@@ -40,14 +40,23 @@ public class Day5 {
      *
      */
 
-    static long partTwo(List<String> codes) {
-        Set<Long> seats = codes.stream().map(Day5::computeSeatNumber).collect(Collectors.toUnmodifiableSet());
-        long max = getHighestSeatID(seats);
+    static int partTwo(List<String> codes) {
+        Set<Integer> seats = codes.stream().map(Day5::computeSeatNumber).collect(Collectors.toUnmodifiableSet());
+        int max = getHighestSeatID(seats);
+
         int result = 0;
         for (int i = 0; i < max; i++) {
-            if (!seats.contains((long) i)) {
+            /**
+            if (!seats.contains( i)) {
                 result = i;
+
+            }*/
+            if(seats.contains(i))
+            {
+                continue;
+
             }
+            result = i;
         }
         return result;
     }
@@ -123,18 +132,18 @@ public class Day5 {
      * Every seat also has a unique seat ID: multiply the row by 8, then add the column
      */
 
-    private static long computeSeatNumber(String code) {
+    private static int computeSeatNumber(String code) {
         int row = computeRowNumber(code.substring(0, 7));
         int column = computeColumnNumber(code.substring(7));
 
-        return (long) row * 8 + column;
+        return row * 8 + column;
     }
     /**
      * Compute the highest seat ID on the boarding pass
      */
-    private static long getHighestSeatID(Set<Long>seats)
+    private static int getHighestSeatID(Set<Integer>seats)
     {
-        return  seats.stream().mapToLong(i->i).max().orElseThrow();
+        return  seats.stream().mapToInt(i->i).max().orElseThrow();
     }
 
 }
