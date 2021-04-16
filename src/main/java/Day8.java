@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,9 +30,15 @@ import java.util.stream.Collectors;
 public class Day8 {
 
     public static void main(String[] args) throws IOException {
-        final List<String> lines = Files.lines(Path.of("C:\\Users\\pontd\\IdeaProjects\\AdventOfCode\\src\\main\\resources\\inputDay7.txt")).collect(Collectors.toUnmodifiableList());
-        ArrayList<String> inputFile = (ArrayList<String>) lines;
+      final List<String> lines = Files.lines(Path.of("C:\\Users\\pontd\\IdeaProjects\\AdventOfCode\\src\\main\\resources\\inputDay8.txt")).collect(Collectors.toUnmodifiableList());
 
+      // convert a List<String> in a ArrayList<String>
+      ArrayList<String> inputFile = new ArrayList<String>(lines);
+
+      // convert a ArrayList<String> in a ArrayList<Instruction>
+      ArrayList<Instruction> instr = convertToArrayListInstuction(inputFile);
+      // Output the result of part One
+        System.out.println("part One := " + runPart1(instr));
     }
 
     /**  Part One
@@ -72,6 +79,31 @@ public class Day8 {
      * what value is in the accumulator?
      *
      */
+
+    /**
+     * The method convertToArrayListInstruction converts a ArrayList<String> Datatype in a
+     *  ArrayList<Instruction> Datatype
+     */
+    public static ArrayList<Instruction> convertToArrayListInstuction (ArrayList<String> inputFile)
+    {
+        ArrayList<Instruction> instructions = new ArrayList<>();
+
+        for(int index = 0; index < inputFile.size(); index++)
+        {
+            Instruction instruction = new Instruction(inputFile.get(index).substring(0,3),
+                    Integer.parseInt(inputFile.get(index).substring(4)));
+
+            instructions.add(instruction);
+
+        }
+        return instructions;
+
+    }
+
+    /**
+     * This method calculates the current value in the accumulator
+     *
+     */
     public static int runPart1(ArrayList<Instruction> arrayOfInstructions)
     {
         int acc = 0;
@@ -82,16 +114,16 @@ public class Day8 {
         {
             visited[index] = true;
 
-            if(arrayOfInstructions.get(index).getOperation() == "nop")
+            if(arrayOfInstructions.get(index).getOperation().equals("nop"))
             {
                 index++;
             }
-            else if(arrayOfInstructions.get(index).getOperation() == "acc")
+            else if(arrayOfInstructions.get(index).getOperation().equals("acc"))
             {
                 acc += arrayOfInstructions.get(index).getArgument();
                 index++;
             }
-            else if(arrayOfInstructions.get(index).getOperation() == "jmp")
+            else if(arrayOfInstructions.get(index).getOperation().equals("jmp"))
             {
                 index += arrayOfInstructions.get(index).getArgument();
             }
@@ -102,6 +134,9 @@ public class Day8 {
 
 }
 
+
+
+
 class Instruction {
     String operation;
     int argument;
@@ -110,14 +145,17 @@ class Instruction {
         return operation;
     }
 
+
     public int getArgument() {
         return argument;
     }
+
 
     public Instruction(String operation, int argument) {
         this.operation = operation;
         this.argument = argument;
     }
+
 
 
 }
