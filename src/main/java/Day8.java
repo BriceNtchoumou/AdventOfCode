@@ -33,12 +33,12 @@ public class Day8 {
       final List<String> lines = Files.lines(Path.of("C:\\Users\\pontd\\IdeaProjects\\AdventOfCode\\src\\main\\resources\\inputDay8.txt")).collect(Collectors.toUnmodifiableList());
 
       // convert a List<String> in a ArrayList<String>
-      ArrayList<String> inputFile = new ArrayList<String>(lines);
+      List<String> inputFile = new ArrayList<String>(lines);
 
       // convert a ArrayList<String> in a ArrayList<Instruction>
-      ArrayList<Instruction> instr = convertToArrayListInstuction(inputFile);
+      List<Instruction> instr = convertToArrayListInstuction((ArrayList<String>) inputFile);
       // Output the result of part One
-        System.out.println("part One := " + runPart1(instr));
+        System.out.println("part One := " + runPart1((ArrayList<Instruction>) instr));
     }
 
     /**  Part One
@@ -86,7 +86,7 @@ public class Day8 {
      */
     public static ArrayList<Instruction> convertToArrayListInstuction (ArrayList<String> inputFile)
     {
-        ArrayList<Instruction> instructions = new ArrayList<>();
+        List<Instruction> instructions = new ArrayList<>();
 
         for(int index = 0; index < inputFile.size(); index++)
         {
@@ -96,7 +96,7 @@ public class Day8 {
             instructions.add(instruction);
 
         }
-        return instructions;
+        return (ArrayList<Instruction>) instructions;
 
     }
 
@@ -113,20 +113,29 @@ public class Day8 {
         while(!visited[index])
         {
             visited[index] = true;
+            String op = arrayOfInstructions.get(index).getOperation();
 
-            if(arrayOfInstructions.get(index).getOperation().equals("nop"))
+            switch(op)
             {
-                index++;
+                case "nop":
+                {
+                    index++;
+                    break;
+                }
+                case "jmp":
+                {
+                    index += arrayOfInstructions.get(index).getArgument();
+                    break;
+                }
+                case "acc":
+                {
+                    acc += arrayOfInstructions.get(index).getArgument();
+                    index++;
+                    break;
+                }
+
             }
-            else if(arrayOfInstructions.get(index).getOperation().equals("acc"))
-            {
-                acc += arrayOfInstructions.get(index).getArgument();
-                index++;
-            }
-            else if(arrayOfInstructions.get(index).getOperation().equals("jmp"))
-            {
-                index += arrayOfInstructions.get(index).getArgument();
-            }
+
         }
         return acc;
 
