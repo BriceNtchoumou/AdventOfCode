@@ -40,6 +40,7 @@ public class Day8 {
         List<Instruction> instr = convertToArrayListInstuction((ArrayList<String>) inputFile);
         // Output the result of part One
          System.out.println("part One := " + runPart1((ArrayList<Instruction>) instr));
+         System.out.println("part Two := " + runPart2((ArrayList<Instruction>) instr));
 
 
 
@@ -74,11 +75,50 @@ public class Day8 {
     public static int runPart2(ArrayList<Instruction> arrayOfInstructions)
     {
         int accumulator = 0;
+        int index = 0;
+        boolean terminiert = false;
        ArrayList<Instruction>[] myArrayListInstruction = new ArrayList[arrayOfInstructions.size()];
        for(int i = 0; i < arrayOfInstructions.size(); i++)
        {
 
            myArrayListInstruction[i] = modifyInstructionOperation(arrayOfInstructions,i);
+
+           while(!terminiert)
+           {
+                  boolean[] visited = new boolean[myArrayListInstruction.length];
+
+                 while(!visited[index])
+                 {
+                     visited[index] = true;
+                    String op = myArrayListInstruction[i].get(index).getOperation();
+
+                    switch(op)
+                    {
+                        case "nop":
+                        {
+                            index++;
+                            break;
+                        }
+                        case "jmp":
+                        {
+                            index += arrayOfInstructions.get(index).getArgument();
+                            break;
+                        }
+                        case "acc":
+                        {
+                            accumulator += arrayOfInstructions.get(index).getArgument();
+                            index++;
+                            break;
+                        }
+                    }
+                 }
+                 if(index == arrayOfInstructions.size())
+                 {
+                     terminiert = true;
+                 }
+           }
+
+
 
 
 
