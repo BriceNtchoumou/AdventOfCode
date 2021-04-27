@@ -53,8 +53,21 @@ public class Day11 {
         {
             inputFile = lines.collect(Collectors.toList());
         }
-       
+        List<char[]> myCharacterArrayList = convertListStringToListOfCharacterArray(inputFile);
+     //   List<char[]> checkRulesList = checkRules(myCharacterArrayList);
+     //   int result1 = countOccupiedSeats(checkRulesList);
+     //   System.out.println("part One := " + result1);
 
+
+    }
+    private static List<char[]> convertListStringToListOfCharacterArray(List<String> stringList)
+    {
+        List<char[]> arrayListChar = new ArrayList<>();
+        for(String str : stringList)
+        {
+            arrayListChar.add(str.toCharArray());
+        }
+        return arrayListChar;
     }
 
     private static int countOccupiedSeats(List<char[]> list)
@@ -72,8 +85,8 @@ public class Day11 {
 
     private static List<char[]> checkRules(List<char[]> mySeat)
     {
-         List<char[]> myList = new ArrayList<>(mySeat);
-         for (int i = 0; i < mySeat.size(); i++) {
+        List<char[]> myList = new ArrayList<>(mySeat);
+        for (int i = 0; i < mySeat.size(); i++) {
             for (int j = 0; j < mySeat.get(i).length; j++) {
                 switch (mySeat.get(i)[j]) {
                     case 'L' -> {
@@ -91,7 +104,7 @@ public class Day11 {
                 }
             }
         }
-         return myList;
+        return myList;
 
     }
 
@@ -218,21 +231,6 @@ public class Day11 {
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
         return count;
     }
-
-
-
 }
