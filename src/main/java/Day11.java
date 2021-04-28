@@ -60,7 +60,7 @@ public class Day11 {
 
 
     }
-    private static List<char[]> convertListStringToListOfCharacterArray(List<String> stringList)
+    public static List<char[]> convertListStringToListOfCharacterArray(List<String> stringList)
     {
         List<char[]> arrayListChar = new ArrayList<>();
         for(String str : stringList)
@@ -70,7 +70,7 @@ public class Day11 {
         return arrayListChar;
     }
 
-    private static int countOccupiedSeats(List<char[]> list)
+    public static int countOccupiedSeats(List<char[]> list)
     {
         int count = 0;
         for (char[] chars : list) {
@@ -83,7 +83,7 @@ public class Day11 {
         return count;
     }
 
-    private static List<char[]> checkRules(List<char[]> mySeat)
+    public static List<char[]> checkRules(List<char[]> mySeat)
     {
         List<char[]> myList = new ArrayList<>(mySeat);
         for (int i = 0; i < mySeat.size(); i++) {

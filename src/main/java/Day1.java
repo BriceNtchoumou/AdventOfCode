@@ -1,9 +1,7 @@
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /** @version 1.0  22.03.2021
@@ -28,7 +26,7 @@ public class Day1 {
        // Charset charset = Charset.forName("ISO-8859-1");
        //  List<String> result = Files.readAllLines(Paths.get("C:\\inputDay1.txt"), charset);
 
-        final List<String> lines = Files.lines(Path.of("C:\\inputDay1.txt")).collect(Collectors.toUnmodifiableList());
+        final List<String> lines = Files.lines(Path.of("C:\\Users\\mfernandezbi\\workspace\\adventOfCodeII\\AdventOfCode\\src\\main\\resources\\inputDay1.txt")).collect(Collectors.toUnmodifiableList());
 
         // transform the String List in an Integer List
 
@@ -39,17 +37,12 @@ public class Day1 {
         // Find in the Integer List the two entries such that their sum is 2020 and multiply those
         // number together
 
-        for( int a : integerList)
-        {
-            for(int b : integerList)
-            {
-                if(a + b == 2020)
-                {
-                    System.out.printf(" a := %d , b := %d. %n",a,b);
-                    System.out.printf(" a * b := %d.%n",a * b);
-                }
-            }
+        List<Integer> linesWithSum2020 = findLinesWithSum2020(integerList);
+        if (linesWithSum2020.size() == 2) {
+            System.out.printf(" a := %d , b := %d. %n", linesWithSum2020.get(0), linesWithSum2020.get(1));
+            System.out.printf(" a * b := %d.%n", linesWithSum2020.get(0) * linesWithSum2020.get(1));
         }
+
 
         /** Part two
          *  The program will find in the same list three entries that the sum is 2020
@@ -72,6 +65,20 @@ public class Day1 {
             }
         }
 
+    }
+
+    public static List<Integer> findLinesWithSum2020(List<Integer> integerList) {
+        for( int a : integerList)
+        {
+            for(int b : integerList)
+            {
+                if(a + b == 2020)
+                {
+                    return List.of(a, b);
+                }
+            }
+        }
+        return new ArrayList<>();
     }
 
 }
