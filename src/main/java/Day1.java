@@ -26,7 +26,7 @@ public class Day1 {
        // Charset charset = Charset.forName("ISO-8859-1");
        //  List<String> result = Files.readAllLines(Paths.get("C:\\inputDay1.txt"), charset);
 
-        final List<String> lines = Files.lines(Path.of("C:\\Users\\mfernandezbi\\workspace\\adventOfCodeII\\AdventOfCode\\src\\main\\resources\\inputDay1.txt")).collect(Collectors.toUnmodifiableList());
+        final List<String> lines = Files.lines(Path.of("C:\\inputDay1.txt")).collect(Collectors.toUnmodifiableList());
 
         // transform the String List in an Integer List
 
