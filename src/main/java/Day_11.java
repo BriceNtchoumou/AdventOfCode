@@ -123,7 +123,7 @@ public class Day_11 {
     }
 
     // This method executes the part One of this exercise
-    private static int runPartOne(List<char[]> myList) {
+    public static int runPartOne(List<char[]> myList) {
         List<char[]> mySeats;
         do {
             mySeats = deepClone(myList);
@@ -133,7 +133,7 @@ public class Day_11 {
     }
 
     // This method converts a datatype List<String> to another datatype List<char[]>
-    private static List<char[]> convertListStringToListOfCharacterArray(List<String> stringList)
+    public static List<char[]> convertListStringToListOfCharacterArray(List<String> stringList)
     {
         List<char[]> arrayListChar = new ArrayList<>();
         for(String str : stringList)
@@ -144,7 +144,7 @@ public class Day_11 {
     }
 
    // This method counts the number of occupied seats
-    private static int countOccupiedSeats(List<char[]> list)
+    public static int countOccupiedSeats(List<char[]> list)
     {
         int count = 0;
         for (char[] chars : list) {
@@ -160,7 +160,7 @@ public class Day_11 {
     /* This method checks the rules, to know if a a empty seat becomes occupied and an occupied
      * seat becomes empty
      */
-    private static List<char[]> checkRules(List<char[]> mySeat)
+    public static List<char[]> checkRules(List<char[]> mySeat)
     {
         List<char[]> myList = deepClone(mySeat);
         for (int i = 0; i < mySeat.size(); i++) {
@@ -186,7 +186,7 @@ public class Day_11 {
     /*
      * This method counts the number of adjacent seats at the position (row,col)
      */
-    private static int countAdjacentSeats(List<char[]> list, int row, int col)
+    public static int countAdjacentSeats(List<char[]> list, int row, int col)
     {
         int num = 0;
         for (int i = Math.max(row - 1, 0); i <= row + 1 && i < list.size(); i++)
@@ -205,7 +205,7 @@ public class Day_11 {
     /*
      * This method clones a List<char[]>
      */
-    private static List<char[]> deepClone(List<char[]> oldList) {
+    public static List<char[]> deepClone(List<char[]> oldList) {
         List<char[]> newList = new ArrayList<>();
         for (char[] array : oldList) {
             char[] characterArray = new char[array.length];
@@ -218,7 +218,7 @@ public class Day_11 {
     /*
      * This method checks if the rules cause no seats to change state
      */
-    private static boolean changeState(List<char[]> oldList, List<char[]> newList) {
+    public static boolean changeState(List<char[]> oldList, List<char[]> newList) {
        for (int i = 0; i < oldList.size(); i++) {
          for (int j = 0; j < oldList.get(i).length; j++) {
             if (oldList.get(i)[j] != newList.get(i)[j]) {
